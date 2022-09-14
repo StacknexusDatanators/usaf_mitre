@@ -1,0 +1,24 @@
+---
+name: mask-usaf-aoc-data
+version: v1
+type: policy
+layer: user
+description: "data policy to hash aoc columns by name"
+owner:
+policy:
+  data:
+    type: mask
+    priority: 99
+    selector:
+      user:
+        match: any
+        tags:
+          - "dataos:u:data-analyst"
+      column:
+        names:
+          - "name"
+    mask:
+      # operator: redact
+      operator: hash
+      hash:
+        algo: sha256
